@@ -16,7 +16,7 @@ jobs:
         with:
           scan-type: 'config'
           scan-ref: 'Dockerfile'
-          trivy-config: trivy.yaml 
+          trivy-config: .github/workflows/trivy.yaml 
       - name: Build an image from Dockerfile
         run: |
           ls -l 
@@ -35,4 +35,4 @@ jobs:
         with:
           scan-type: 'config'
           scan-ref: './nginx-deploy'
-          trivy-config: trivy.yaml
+          trivy-config: .github/workflows/trivy.yaml
