@@ -39,3 +39,13 @@ jobs:
           severity: 'High,Critical'
           format: table
           exit-code: 0
+      - name: Security scan for terraform code
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: './terraform'
+          # trivy-config: .github/workflows/trivy.yaml
+          severity: 'High,Critical'
+          format: table
+          exit-code: 0
+        
