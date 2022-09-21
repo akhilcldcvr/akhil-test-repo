@@ -30,3 +30,9 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+      - name: Security threats in kubernetes yaml
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: './nginx-deploy'
+          trivy-config: trivy.yaml
