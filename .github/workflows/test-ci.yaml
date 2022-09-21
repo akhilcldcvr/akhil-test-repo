@@ -36,6 +36,6 @@ jobs:
           scan-type: 'config'
           scan-ref: './nginx-deploy'
           # trivy-config: .github/workflows/trivy.yaml
-          severity: 'High, Critical'
+          severity: 'High,Critical'
           format: table
           exit-code: 0
