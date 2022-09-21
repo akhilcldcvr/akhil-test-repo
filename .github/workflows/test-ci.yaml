@@ -36,3 +36,4 @@ jobs:
           scan-type: 'config'
           scan-ref: './nginx-deploy'
           trivy-config: .github/workflows/trivy.yaml
+          severity: 'High, Critical'
