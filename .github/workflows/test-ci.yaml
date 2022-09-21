@@ -38,4 +38,4 @@ jobs:
           # trivy-config: .github/workflows/trivy.yaml
           severity: 'High, Critical'
           format: table
-          exit: 0
+          exit-code: 0
