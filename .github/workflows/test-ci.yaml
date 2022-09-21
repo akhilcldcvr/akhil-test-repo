@@ -20,7 +20,7 @@ jobs:
       - name: Build an image from Dockerfile
         run: |
           ls -l 
-          docker build -t docker.io/my-organization/my-app:${{ github.sha }} ../../
+          docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
