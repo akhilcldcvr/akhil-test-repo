@@ -1,0 +1,50 @@
+name: build
+on:
+  push:
+    branches:
+      - akhil-poc
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Basic sanity check of Dockerfile
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: 'Dockerfile'
+          trivy-config: .github/workflows/trivy.yaml 
+      - name: Build an image from Dockerfile
+        run: |
+          ls -l 
+          docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+      - name: Security threats in kubernetes yaml
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: './nginx-deploy'
+          # trivy-config: .github/workflows/trivy.yaml
+          severity: 'High,Critical'
+          format: table
+          exit-code: 0
+      - name: Security scan for terraform code
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: './terraform'
+          # trivy-config: .github/workflows/trivy.yaml
+          severity: 'High,Critical'
+          format: table
+          exit-code: 0
+        
